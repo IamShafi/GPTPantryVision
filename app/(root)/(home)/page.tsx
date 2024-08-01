@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 
 const HomePage = () => {
   return (
@@ -11,12 +12,16 @@ const HomePage = () => {
         Classify pantry items and discover recipes easily. Keep your kitchen
         organized and make meal planning simple.
       </h2>
-      <button
-        type="button"
-        className="wishlist_btn mt-[20px] px-[18px] py-[18px]"
-      >
-        Join Wishlist
-      </button>
+      <Link href="/wish-list">
+        <button
+          type="button"
+          className="wishlist_btn mt-[20px] px-[18px] py-[18px]"
+        >
+          Join Wishlist
+        </button>
+      </Link>
+
+      
     </section>
   );
 };
