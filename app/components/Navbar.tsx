@@ -16,7 +16,7 @@ const Navbar = () => {
               GPT Vision
             </button>
           </Link>
-          <Link href="/ai-suggestion">
+          <Link href="/recipe-suggestion">
             <button type="button" className="black_btn max-sm:hidden md:flex">
               AI Suggestion
             </button>

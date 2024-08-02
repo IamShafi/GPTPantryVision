@@ -24,6 +24,7 @@ const PantryList: React.FC<PantryListProps> = ({ items, fetchItems }) => {
   const handleDelete = async (id: string) => {
     await deleteDoc(doc(db, 'pantryItems', id));
     fetchItems();
+    updateLocalStorage();
   };
 
   const handleEdit = (id: string, name: string) => {
@@ -37,12 +38,22 @@ const PantryList: React.FC<PantryListProps> = ({ items, fetchItems }) => {
     setEditingItemId(null);
     setEditedItemName('');
     fetchItems();
+    updateLocalStorage();
+  };
+
+  const updateLocalStorage = () => {
+    const storedItems = localStorage.getItem('pantryItems');
+    if (storedItems) {
+      const items = JSON.parse(storedItems).filter((item: PantryItem) => item.id !== editingItemId);
+      items.push({ id: editingItemId, name: editedItemName });
+      localStorage.setItem('pantryItems', JSON.stringify(items));
+    }
   };
 
   return (
     <List>
       {items.map((item, index) => (
-        <ListItem key={item.id} sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <ListItem key={item.id} sx={{ display: 'flex', justifyContent: 'space-between', border: '1px solid #ccc', borderRadius: '5px', padding: '10px'}}>
           {editingItemId === item.id ? (
             <TextField
               value={editedItemName}

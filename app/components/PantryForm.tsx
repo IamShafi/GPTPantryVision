@@ -18,6 +18,16 @@ const PantryForm: React.FC<PantryFormProps> = ({ fetchItems }) => {
       await addDoc(collection(db, 'pantryItems'), { name: itemName });
       setItemName('');
       fetchItems(); 
+      updateLocalStorage();
+    }
+  };
+
+  const updateLocalStorage = () => {
+    const storedItems = localStorage.getItem('pantryItems');
+    if (storedItems) {
+      const items = JSON.parse(storedItems);
+      items.push({ name: itemName });
+      localStorage.setItem('pantryItems', JSON.stringify(items));
     }
   };
 
